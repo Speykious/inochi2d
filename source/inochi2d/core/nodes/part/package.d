@@ -10,6 +10,7 @@ module inochi2d.core.nodes.part;
 import inochi2d.integration;
 import inochi2d.fmt;
 import inochi2d.core.nodes.drawable;
+import inochi2d.core.dbg;
 import inochi2d.core;
 import inochi2d.math;
 import bindbc.opengl;
@@ -162,6 +163,8 @@ private:
         // In some cases this may happen
         if (textures.length == 0) return;
 
+        inDbgPushGroup(name);
+
         // Bind the vertex array
         incDrawableBindVAO();
         static if (isMask) {
@@ -236,6 +239,8 @@ private:
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
         glDisableVertexAttribArray(2);
+
+        inDbgPopGroup();
     }
 
 protected:

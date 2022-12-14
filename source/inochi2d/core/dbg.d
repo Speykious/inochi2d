@@ -1,6 +1,7 @@
 module inochi2d.core.dbg;
 import inochi2d;
 import bindbc.opengl;
+import std.string : toStringz;
 
 package(inochi2d) {
     int indiceCount;
@@ -140,4 +141,19 @@ void inDbgDrawLines(vec4 color, mat4 transform = mat4.identity) {
 
     glBlendFuncSeparate(GL_ONE, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE);
     glDisable(GL_LINE_SMOOTH);
+}
+
+/**
+    Pushes a debug group. Very useful for debugging with tools like apitrace.
+*/
+void inDbgPushGroup(string msg) {
+    // maybe deactivate call if GL_KHR_debug is not supported?
+    debug glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, 0, cast(int) msg.length, msg.toStringz);
+}
+
+/**
+    Pops a debug group. See `inDbgPushGroup`
+*/
+void inDbgPopGroup() {
+    debug glPopDebugGroup();
 }

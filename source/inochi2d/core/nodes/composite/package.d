@@ -9,6 +9,7 @@
 module inochi2d.core.nodes.composite;
 import inochi2d.core.nodes.common;
 import inochi2d.core.nodes;
+import inochi2d.core.dbg;
 import inochi2d.fmt;
 import inochi2d.core;
 import inochi2d.math;
@@ -103,6 +104,8 @@ private:
         // Optimization: Nothing to be drawn, skip context switching
         if (subParts.length == 0) return;
 
+        inDbgPushGroup(name);
+
         inBeginComposite();
 
             foreach(Part child; subParts) {
@@ -139,6 +142,8 @@ private:
 
         // Bind the texture
         glDrawArrays(GL_TRIANGLES, 0, 6);
+
+        inDbgPopGroup();
     }
 
     void selfSort() {
