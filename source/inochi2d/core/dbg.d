@@ -148,12 +148,12 @@ void inDbgDrawLines(vec4 color, mat4 transform = mat4.identity) {
 */
 void inDbgPushGroup(string msg) {
     // maybe deactivate call if GL_KHR_debug is not supported?
-    debug glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, 0, cast(int) msg.length, msg.toStringz);
+    glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, 0, cast(int) msg.length, msg.toStringz);
 }
 
 /**
     Pops a debug group. See `inDbgPushGroup`
 */
 void inDbgPopGroup() {
-    debug glPopDebugGroup();
+    glPopDebugGroup();
 }
