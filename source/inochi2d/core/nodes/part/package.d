@@ -163,7 +163,7 @@ private:
         // In some cases this may happen
         if (textures.length == 0) return;
 
-        inDbgPushGroup(name);
+        inDbgPushGroup("self");
 
         // Bind the vertex array
         incDrawableBindVAO();
@@ -663,6 +663,8 @@ public:
             if (!enabled) return;
             if (!data.isReady) return; // Yeah, don't even try
             
+            inDbgPushGroup(name);
+
             size_t cMasks = maskCount;
 
             if (masks.length > 0) {
@@ -683,6 +685,8 @@ public:
             }
 
             this.drawSelf();
+
+            inDbgPopGroup();
         }
         super.drawOne();
     }
